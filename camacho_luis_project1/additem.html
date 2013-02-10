@@ -3,7 +3,7 @@
    VFW 1302
    Project 1 Name: Case Manager-->
 
-<html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <head>
         <title>Case Manager</title>
         <meta charset="UTF-8" />
@@ -21,64 +21,78 @@
                 <h1>Case Manager</h1>
             </hgroup>
         </header>
-        <form action="#" method="post">
-            <fieldset>
-                <legend>Client Data</legend>
-                <ul>
-                    <li>New or Existing Client?:
-                        <ul>
-                            <li><input type="radio" checked value="New Client" id="New Client" name="client"><label for="New Client">New Client</label> </li>
-                            <li><input type="radio" value="Existing Client" id="Existing Client" name="client"><label for="Existing Client">Existing Client</label> </li>
-                        </ul>
-                    </li>
-                </ul>
-                <form action="#" method="post">
-                    <p>
-                        <label for="firstname">First Name:</label>
-                        <input type="text" name="name" id="firstname">
-                        <br>
-                        <label for="lastname">Last Name:</label>
-                        <input type="text" name="name" id="lastname">
-                    </p>
-                 </form>
-            </fieldset>
-            <fieldset>
-                <ul>
-                    <li>
-                        <label for="payment">Select Method of Payment</label>
-                        <select id="payment">
-                            <optgroup label="Payment Options">
-                                <option value="Cash">Cash</option>
-                                <option value="Visa">Visa</option>
-                                <option value="American Express">American Express</option>
-                                <option value="Travelers Check">Travelers Check</option>
-                            </optgroup>
-                        </select>
-                    </li>
-                </ul>
-            </fieldset>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Required Data for Initial Consultation</legend>
+                    <ul>
+                        <li>Client:
+                            <ul>
+                            <li><label for="firstname">First Name:</label>
+                                <input type="text" name="name" id="firstname"></li>
+                            <li><label for="lastname">Last Name:</label>
+                                <input type="text" name="name" id="lastname"></li>
+                            </ul>
+                                <br>
+                        <li>New or Existing Client?:
+                            <ul>
+                                <li><input type="radio" checked value="New Client" id="New Client" name="client">
+                                    <label for="New Client">New Client</label></li>
+                                <li><input type="radio" value="Existing Client" id="Existing Client" name="client">
+                                    <label for="Existing Client">Existing Client</label></li>
+                            </ul>
+                                <br>
+                        </li>
+                        <li>Type of Case:
+                            <ul>
+                                <li><input type="checkbox" name="case" id="Immigration Law">
+                                    <label for="Immigration Law">Immigration Law</label></li>
+                                <li><input type="checkbox" name="case" id="Business Formation">
+                                    <label for="Business Formation">Business Formation</label></li>
+                                <li><input type="checkbox" name="case" id="Document Drafting">
+                                    <label for="Document Drafting">Document Drafting</label></li>
+                            </ul>
+                                <br>
+                                <li>
+                                    <label for="firstconsult">Select Initial Consultation:</label>
+                                    <input type="datetime" name="datetime" id="firstconsult">
+                                <br>
+                        <li><label for="payment">Select Method of Payment</label>
+                            <select id="payment">
+                                <optgroup label="Payment Options">
+                                    <option value="Cash">Cash</option>
+                                    <option value="Visa">Visa</option>
+                                    <option value="American Express">American Express</option>
+                                    <option value="Travelers Check">Travelers Check</option>
+                                </optgroup>
+                            </select>
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
+            <form method="post" name="form1">
+                <fieldset>
+                    <legend>Client Feedback</legend>
+                    <ul>
+                        <li>
+                            <label for="clientfeedback">Client Comments:</label><br>
+                            <textarea id="clientfeedback"></textarea>
+                        <li><input type="hidden" value="true"/></li>
 
-
-
-        </form>
-            <fieldset>
-                <form method="post" name="form1">
-                    <p>
-                        <label for="rating">Client Expectations Rating System:</label>
-                        <input type="range" name="rating" id="rating" min="0" max="10" value="0" onchange="display_rate.value=this.value"><output name="display_rate" for="rating"></output>
-                    </p>
-                </form>
-            </fieldset>
+                        <li><label for="rating">Rate Form Process:</label>
+                            <input type="range" name="rating" id="rating" min="0" max="10" value="0" onchange="display_rate.value=this.value"><output name="display_rate" for="rating"></output>
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
         <footer>
             <nav>
-                <form method="post" action="#">
+            <form method="post" action="#">
                     <button><strong>Begin Process</strong></button>
-                </form>
                 <ul>
                    <li><a href="#">clear stored data</a></li>
                    <li><a href="#">display data</a></li>
                 </ul>
-
+            </form>
             </nav>
         </footer>
     </body>
@@ -87,4 +101,4 @@
 
 
 
-(1) type of case, (2) repeat client?, (3) paid yet?, (4) court necessary, etc
+<!--(1) type of case, (2) repeat client?, (3) paid yet?, (4) court necessary, etc-->
