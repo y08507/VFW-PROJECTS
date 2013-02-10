@@ -1,43 +1,90 @@
 <!DOCTYPE html>
+<!-- Author: Luis Camacho Jr.
+   VFW 1302
+   Project 1 Name: Case Manager-->
+
 <html>
     <head>
         <title>Case Manager</title>
         <meta charset="UTF-8" />
         <meta name="description" content="Attorney <-> Client App is a management system which tracks and streamlines updates about the Case"/>
         <meta name="keywords" content="Attorney, Case log, Clients" />
+        <meta name="robots" content="noindex, nofollow"/>
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
         <meta name="viewport" content="target-densitydpi=device-dpi" />
         <meta name="HandheldFriendly" content="true"/>
         <meta name="MobileOptimized" content="320/">
     </head>
     <body>
+        <header>
+            <hgroup>
+                <h1>Case Manager</h1>
+            </hgroup>
+        </header>
         <form action="#" method="post">
             <fieldset>
                 <legend>Client Data</legend>
                 <ul>
                     <li>New or Existing Client?:
-                    <li><input type="radio" checked value="New Client" id="New Client" name="client"><label for="New Client">New Client</label> </li>
-                    <li><input type="radio" value="Existing Client" id="Existing Client" name="client"><label for="Existing Client">Existing Client</label> </li>
-
+                        <ul>
+                            <li><input type="radio" checked value="New Client" id="New Client" name="client"><label for="New Client">New Client</label> </li>
+                            <li><input type="radio" value="Existing Client" id="Existing Client" name="client"><label for="Existing Client">Existing Client</label> </li>
+                        </ul>
+                    </li>
+                </ul>
+                <form action="#" method="post">
+                    <p>
+                        <label for="firstname">First Name:</label>
+                        <input type="text" name="name" id="firstname">
+                        <br>
+                        <label for="lastname">Last Name:</label>
+                        <input type="text" name="name" id="lastname">
+                    </p>
+                 </form>
+            </fieldset>
+            <fieldset>
+                <ul>
+                    <li>
+                        <label for="payment">Select Method of Payment</label>
+                        <select id="payment">
+                            <optgroup label="Payment Options">
+                                <option value="Cash">Cash</option>
+                                <option value="Visa">Visa</option>
+                                <option value="American Express">American Express</option>
+                                <option value="Travelers Check">Travelers Check</option>
+                            </optgroup>
+                        </select>
+                    </li>
                 </ul>
             </fieldset>
+
+
+
         </form>
             <fieldset>
                 <form method="post" name="form1">
                     <p>
                         <label for="rating">Client Expectations Rating System:</label>
-                        <input type="range" name="rating" id="rating" min="0" max="10"  value="0" onchange="display_rate.value=this.value"><output name="display_rate" for="rating"></output>
+                        <input type="range" name="rating" id="rating" min="0" max="10" value="0" onchange="display_rate.value=this.value"><output name="display_rate" for="rating"></output>
                     </p>
                 </form>
             </fieldset>
+        <footer>
+            <nav>
+                <form method="post" action="#">
+                    <button><strong>Begin Process</strong></button>
+                </form>
+                <ul>
+                   <li><a href="#">clear stored data</a></li>
+                   <li><a href="#">display data</a></li>
+                </ul>
 
-
+            </nav>
+        </footer>
     </body>
 </html>
 
 
-<FORM METHOD="get" ACTION="additem.html">
-    <button><strong>Begin Managing Case</strong></button>
-</FORM>
+
 
 (1) type of case, (2) repeat client?, (3) paid yet?, (4) court necessary, etc
