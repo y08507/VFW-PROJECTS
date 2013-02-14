@@ -6,7 +6,6 @@
 
 <html xmlns="http://www.w3.org/1999/html">
     <head>
-        <title>Case Manager</title>
         <meta charset="UTF-8" />
         <meta name="description" content="Attorney &#126; Client App is a management system which tracks and streamlines updates about the Case"/>
         <meta name="keywords" content="Attorney, Case log, Clients" />
@@ -15,6 +14,8 @@
         <meta name="viewport" content="target-densitydpi=device-dpi" />
         <meta name="HandheldFriendly" content="true"/>
         <meta name="MobileOptimized" content="320/">
+        <title>Case Manager</title>
+        <link rel="stylesheet" href="additem.css" />
     </head>
     <body>
         <header>
@@ -41,12 +42,14 @@
                     </div>
                     <div>
                         <ul>
-                            <li>New or Existing Client?:
+                        <li>New or Existing Client?:
                                 <ul>
-                                    <li><input type="radio" checked value="New Client" id="New Client" name="client">
-                                        <label for="New Client">New Client</label></li>
-                                    <li><input type="radio" value="Existing Client" id="Existing Client" name="client">
-                                        <label for="Existing Client">Existing Client</label></li>
+                                    <li><label for="New Client">New Client</label>
+                                        <input type="radio" checked value="New Client" id="New Client" name="client"></li>
+
+                                    <li><label for="Existing Client">Existing Client</label>
+                                        <input type="radio" value="Existing Client" id="Existing Client" name="client"></li>
+
 
                                 </ul>
                             </li>
@@ -56,12 +59,15 @@
                         <ul>
                             <li>Type of Case:
                                 <ul>
-                                    <li><input type="checkbox" name="case" id="Immigration Law">
-                                        <label for="Immigration Law">Immigration Law</label></li>
-                                    <li><input type="checkbox" name="case" id="Business Formation">
-                                        <label for="Business Formation">Business Formation</label></li>
-                                    <li><input type="checkbox" name="case" id="Document Drafting">
-                                        <label for="Document Drafting">Document Drafting</label></li>
+                                    <li><label for="Immigration Law">Immigration Law</label>
+                                    <input type="checkbox" name="case" id="Immigration Law"></li>
+
+                                    <li><label for="Business Formation">Business Formation</label>
+                                        <input type="checkbox" name="case" id="Business Formation"></li>
+
+                                    <li><label for="Document Drafting">Document Drafting</label>
+                                        <input type="checkbox" name="case" id="Document Drafting"></li>
+
                                 </ul>
                             </li>
                         </ul>
