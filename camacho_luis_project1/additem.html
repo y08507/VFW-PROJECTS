@@ -33,9 +33,9 @@
                             <li>Client:
                                 <ul>
                                     <li><label for="firstname">First Name:</label>
-                                        <input type="text" name="name" id="firstname"></li>
+                                        <input type="text" name="name" id="firstname" placeholder="First Name"></li>
                                     <li><label for="lastname">Last Name:</label>
-                                        <input type="text" name="name" id="lastname"></li>
+                                        <input type="text" name="name" id="lastname" placeholder="Last Name"></li>
                                 </ul>
                             </li>
                         </ul>
@@ -49,8 +49,6 @@
 
                                     <li><label for="Existing Client">Existing Client</label>
                                         <input type="radio" value="Existing Client" id="Existing Client" name="client"></li>
-
-
                                 </ul>
                             </li>
                         </ul>
@@ -67,7 +65,6 @@
 
                                     <li><label for="Document Drafting">Document Drafting</label>
                                         <input type="checkbox" name="case" id="Document Drafting"></li>
-
                                 </ul>
                             </li>
                         </ul>
@@ -93,16 +90,12 @@
                         </ul>
                     </div>
                 </fieldset>
-            </form>
-        </section>
-        <section>
-            <form method="post" name="form1">
                 <fieldset>
                     <legend>Client Feedback</legend>
                     <div>
                         <ul>
                             <li><label for="clientfeedback">Client Comments:</label>
-                                <textarea id="clientfeedback"></textarea></li>
+                                <textarea id="clientfeedback" placeholder="Provide Details"></textarea></li>
                         </ul>
                     </div>
                     <div>
@@ -121,15 +114,14 @@
             </form>
         </section>
         <footer>
-            <form method="post" action="#">
-                    <div>
-                        <button><strong>Begin Process</strong></button>
-                    </div>
-                    <nav>
-                        <a href="#">Clear Stored Data</a>
-                        <a href="#">Display Data</a>
-                    </nav>
-            </form>
+
+            <div>
+                <button><strong>Begin Process</strong></button>
+            </div>
+            <nav>
+                <a href="#">Clear Stored Data</a>
+                <a href="#">Display Data</a>
+            </nav>
         </footer>
     </body>
 </html>

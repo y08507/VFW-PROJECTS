@@ -18,12 +18,21 @@ header {
         position: relative;
 }
 article {
+         border: 3px double #034001;
          text-align: center;
+         color: #3C593B;
+         background-color: #F2F2F2;
+         font-family: serif;
          font-size: 18px;
+         line-height: 20px;
          margin: 5px 5px 9px 5px;
-         padding: 1px 0;
+         padding: 0 20px;
          position: relative;
 }
 footer {
         text-align: center;
 }
+button {
+        color: #034001;
+}
+
