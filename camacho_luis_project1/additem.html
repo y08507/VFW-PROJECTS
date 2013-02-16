@@ -16,6 +16,8 @@
         <meta name="MobileOptimized" content="320/">
         <title>Case Manager</title>
         <link rel="stylesheet" href="additem.css" />
+        <script src="http://use.edgefonts.net/syncopate.js"></script>
+
     </head>
     <body>
         <header>
@@ -23,11 +25,12 @@
                 <h1>Case Manager</h1>
                 <h2>Attorney&#126;Client</h2>
             </hgroup>
+
         </header>
         <section>
             <form action="#" method="post">
                 <fieldset>
-                    <legend>Required Data for Initial Consultation</legend>
+                    <legend>Data for Initial Consultation</legend>
                     <div>
                         <ul>
                             <li>Client:
@@ -44,11 +47,10 @@
                         <ul>
                         <li>New or Existing Client?:
                                 <ul>
-                                    <li><label for="New Client">New Client</label>
-                                        <input type="radio" checked value="New Client" id="New Client" name="client"></li>
-
-                                    <li><label for="Existing Client">Existing Client</label>
-                                        <input type="radio" value="Existing Client" id="Existing Client" name="client"></li>
+                                    <li><label for="newClient">New Client</label>
+                                        <input type="radio" checked value="newClient" id="newClient" name="client"></li>
+                                    <li><label for="existingClient">Existing Client</label>
+                                        <input type="radio" value="existingClient" id="existingClient" name="client"></li>
                                 </ul>
                             </li>
                         </ul>
@@ -57,22 +59,20 @@
                         <ul>
                             <li>Type of Case:
                                 <ul>
-                                    <li><label for="Immigration Law">Immigration Law</label>
-                                    <input type="checkbox" name="case" id="Immigration Law"></li>
-
-                                    <li><label for="Business Formation">Business Formation</label>
-                                        <input type="checkbox" name="case" id="Business Formation"></li>
-
-                                    <li><label for="Document Drafting">Document Drafting</label>
-                                        <input type="checkbox" name="case" id="Document Drafting"></li>
+                                    <li><label for="immigrationLaw">Immigration Law</label>
+                                    <input type="checkbox" name="case" id="immigrationLaw"></li>
+                                    <li><label for="businessFormation">Business Formation</label>
+                                        <input type="checkbox" name="case" id="businessFormation"></li>
+                                    <li><label for="documentDrafting">Document Drafting</label>
+                                        <input type="checkbox" name="case" id="documentDrafting"></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                     <div>
                         <ul>
-                            <li><label for="firstconsult">Select Initial Consultation:</label>
-                                <input type="date" name="date" id="firstconsult"></li>
+                            <li><label for="firstConsult">Schedule Consultation:</label>
+                                <input type="date" name="date" id="firstConsult"></li>
                         </ul>
                     </div>
                     <div>
@@ -94,8 +94,8 @@
                     <legend>Client Feedback</legend>
                     <div>
                         <ul>
-                            <li><label for="clientfeedback">Client Comments:</label>
-                                <textarea id="clientfeedback" placeholder="Provide Details"></textarea></li>
+                            <li><label for="clientFeedback">Client Comments:</label>
+                                <textarea id="clientFeedback" placeholder="Provide Details.."></textarea></li>
                         </ul>
                     </div>
                     <div>
@@ -116,6 +116,7 @@
         <footer>
 
             <div>
+                <input type="button" id="myButton" value="Begin Process">
                 <button><strong>Begin Process</strong></button>
             </div>
             <nav>
@@ -123,6 +124,7 @@
                 <a href="#">Display Data</a>
             </nav>
         </footer>
+        <script type="text/javascript" src="main.js"></script>
     </body>
 </html>
 
