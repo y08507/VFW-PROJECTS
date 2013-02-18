@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<!-- Author: Luis Camacho Jr.
-   VFW
-   Term:1302
-   Project 1 Name: Case Manager-->
+<!--Author: Luis Camacho Jr.
+    Created for: VFW 1302
+    Project 2-->
 
 <html xmlns="http://www.w3.org/1999/html">
     <head>
@@ -13,7 +12,7 @@
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
         <meta name="viewport" content="target-densitydpi=device-dpi" />
         <meta name="HandheldFriendly" content="true"/>
-        <meta name="MobileOptimized" content="320/">
+        <meta name="MobileOptimized" content="320"/>
         <title>Case Manager</title>
         <link rel="stylesheet" href="additem.css" />
         <script src="http://use.edgefonts.net/syncopate.js"></script>
@@ -28,7 +27,7 @@
 
         </header>
         <section>
-            <form action="#" method="post">
+            <form action="#" method="post" id="radioCheck">
                 <fieldset>
                     <legend>Data for Initial Consultation</legend>
                     <div>
@@ -36,9 +35,9 @@
                             <li>Client:
                                 <ul>
                                     <li><label for="firstname">First Name:</label>
-                                        <input type="text" name="name" id="firstname" placeholder="First Name"></li>
+                                        <input type="text" name="clientName" id="firstname" placeholder="First Name"></li>
                                     <li><label for="lastname">Last Name:</label>
-                                        <input type="text" name="name" id="lastname" placeholder="Last Name"></li>
+                                        <input type="text" name="clientName" id="lastname" placeholder="Last Name"></li>
                                 </ul>
                             </li>
                         </ul>
@@ -48,9 +47,9 @@
                         <li>New or Existing Client?:
                                 <ul>
                                     <li><label for="newClient">New Client</label>
-                                        <input type="radio" checked value="newClient" id="newClient" name="client"></li>
+                                        <input type="radio" checked value="New Client" id="newClient" name="client"></li>
                                     <li><label for="existingClient">Existing Client</label>
-                                        <input type="radio" value="existingClient" id="existingClient" name="client"></li>
+                                        <input type="radio" value="Existing Client" id="existingClient" name="client"></li>
                                 </ul>
                             </li>
                         </ul>
@@ -60,11 +59,11 @@
                             <li>Type of Case:
                                 <ul>
                                     <li><label for="immigrationLaw">Immigration Law</label>
-                                    <input type="checkbox" name="case" id="immigrationLaw"></li>
+                                        <input type="checkbox" value="Immigration Law" name="caseType" id="immigrationLaw"></li>
                                     <li><label for="businessFormation">Business Formation</label>
-                                        <input type="checkbox" name="case" id="businessFormation"></li>
+                                        <input type="checkbox" value="Business Formation" name="caseType" id="businessFormation"></li>
                                     <li><label for="documentDrafting">Document Drafting</label>
-                                        <input type="checkbox" name="case" id="documentDrafting"></li>
+                                        <input type="checkbox" value="Document Drafting" name="caseType" id="documentDrafting"></li>
                                 </ul>
                             </li>
                         </ul>
@@ -82,8 +81,8 @@
                                     <optgroup label="Payment Options">
                                         <option value="Cash">Cash</option>
                                         <option value="Visa">Visa</option>
-                                        <option value="American Express">American Express</option>
-                                        <option value="Travelers Check">Travelers Check</option>
+                                        <option value="AmericanExpress">American Express</option>
+                                        <option value="TravelersCheck">Travelers Check</option>
                                     </optgroup>
                                 </select>
                             </li>
@@ -116,12 +115,12 @@
         <footer>
 
             <div>
-                <input type="button" id="myButton" value="Begin Process">
-                <button><strong>Begin Process</strong></button>
+                <input type="submit" id="buttonProcess" value="Begin Process"/>
+                <!--button><strong>Begin Process</strong></button-->
             </div>
             <nav>
-                <a href="#">Clear Stored Data</a>
-                <a href="#">Display Data</a>
+                <a href="#" id="clearStored">Clear Stored Data</a>
+                <a href="#" id="display">Display Data</a>
             </nav>
         </footer>
         <script type="text/javascript" src="main.js"></script>
