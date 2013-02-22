@@ -7,7 +7,7 @@
  */
 // Author: Luis Camacho Jr.
 // Created for: VFW 1302
-// Project 2
+// Project 3
 
 // wait until the DOM is ready
 window.addEventListener("DOMContentLoaded", function () {
