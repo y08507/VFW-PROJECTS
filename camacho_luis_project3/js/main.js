@@ -154,6 +154,48 @@ window.addEventListener("DOMContentLoaded", function () {
         linksLi.appendChild(deleteLink);
     }
 
+    function editItem(){
+        //Grab the data from our item from Local Storage.
+        var value = localStorage.getItem(this.key);
+        var item  = JSON.parse(value);
+
+        //Show form
+        toggleControls("off");
+
+        //Populate the form fields with current localStorage values.
+        $('firstName').value = item.fname[1];
+        $('lastName').value = item.lname[1];
+        $('email').value = item.ename[1];
+        $('phoneNumber').value = item.pnumber[1];
+        var radios = document.forms[0].client;
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].value == "newClient" && item.client[1] == "newClient"){
+                radios[i].setAttribute("checked", "checked");
+            }else if(radios[i].value == "existingClient" && item.client[1] == "newClient"){
+                radios[i].setAttribute("checked", "checked");
+
+            }
+        }
+        if(item.type[1] == "immigrationLaw"){
+            selectedBox.setAttribute("checked", "checked");
+        }else if(item.type[1] == "businessFormation"){
+            selectedBox.setAttribute("checked", "checked");
+        }else if(item.type[1] == "documentDrafting"){
+            $('caseType').setAttribute("checked", "checked");
+        }
+        $('rating').value = item.app[1];
+
+
+
+        status = item.status[1];
+        selectedBox = item.type[1];
+        $('firstConsult').value = item.date[1];
+        $('payment').value = item.payment[1];
+        $('clientFeedback').value = item.notes[1];
+        $('rating').value = item.app[1];
+
+    }
+
     //noinspection FunctionWithInconsistentReturnsJS
     function clearLocal(){
         if(localStorage.length === 0){
@@ -174,6 +216,12 @@ window.addEventListener("DOMContentLoaded", function () {
      //   var validatePnumber = $('phoneNumber');
      //   var validateType = selectedBox;
      //   var validateDate = $('firstConsult');
+
+        //Resetting Error Message Log
+        errorLogs.innerHTML = "";
+        validateFname.style.border = "1px solid black";
+        validateLname.style.border = "1px solid black";
+        validateEname.style.border = "1px solid black";
 
         //Get Error Messages
         var messageAry = [];
@@ -203,13 +251,17 @@ window.addEventListener("DOMContentLoaded", function () {
             for(var i =0; i<messageAry.length; i++){
                 var txt = document.createElement('li');
                 txt.innerHTMl = messageAry[i];
-                $('errorLog').appendChild(txt);
+                errorLogs.appendChild(txt);
             }
+            eData.preventDefault();
+            console.log(messageAry);
+            console.log(txt.innerHTMl);
+            console.log($('errorLog').appendChild(txt))
+            return false;
+        }else{
+            //If no error messages run function to save data.
+            storeData();
         }
-        eData.preventDefault();
-        console.log(messageAry);
-        console.log(txt.innerHTMl);
-        return false;
     }
 
     function testData(){
@@ -223,7 +275,7 @@ window.addEventListener("DOMContentLoaded", function () {
     //Variable defaults
     var status;
     var selectedBox;
-    //var errorLogs = $('errorLog');
+    var errorLogs = $('errorLog');
 
     //Set Link & Submit Click Events
     var displayLink = $('display');
