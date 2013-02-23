@@ -63,7 +63,7 @@ window.addEventListener("DOMContentLoaded", function () {
             //noinspection JSJQueryEfficiency
             $('addNew').style.display = "none";
             //noinspection JSJQueryEfficiency
-            $('items').style.display = "none";
+            $('items').style.display = "block";
         } else {
             return false;
         }
@@ -136,7 +136,7 @@ window.addEventListener("DOMContentLoaded", function () {
         editLink.href = "#";
         editLink.key = key;
         var editText = "Edit Contact";
-        //editLink.addEventListener("click", editItem);
+        editLink.addEventListener("click", editItem);
         editLink.innerHTML = editText;
         linksLi.appendChild(editLink);
 
@@ -146,7 +146,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
         //add delete single item link
         var deleteLink = document.createElement('a');
-        deleteLink.href = "#"
+        deleteLink.href = "#";
         deleteLink.key = key;
         var deleteText = "Delete Contact";
         //deleteLink.addEventListener("click", deleteItem);
@@ -157,8 +157,8 @@ window.addEventListener("DOMContentLoaded", function () {
     function editItem(){
         //Grab the data from our item from Local Storage.
         var value = localStorage.getItem(this.key);
-        var item  = JSON.parse(value);
-
+        var item = JSON.parse(value);
+        console.log(item);
         //Show form
         toggleControls("off");
 
@@ -168,31 +168,46 @@ window.addEventListener("DOMContentLoaded", function () {
         $('email').value = item.ename[1];
         $('phoneNumber').value = item.pnumber[1];
         var radios = document.forms[0].client;
-        for (var i = 0; i < radios.length; i++) {
-            if (radios[i].value == "newClient" && item.client[1] == "newClient"){
-                radios[i].setAttribute("checked", "checked");
-            }else if(radios[i].value == "existingClient" && item.client[1] == "newClient"){
-                radios[i].setAttribute("checked", "checked");
-
+        for(var a = 0; a < radios.length; a++) {
+            if(radios[a].value == "New Client" && item.status[1] == "New Client"){
+                radios[a].setAttribute("checked", "checked");
+            }else if(radios[a].value == "Existing Client" && item.status[1] == "Existing Client"){
+                radios[a].setAttribute("checked", "checked");
             }
         }
-        if(item.type[1] == "immigrationLaw"){
-            selectedBox.setAttribute("checked", "checked");
-        }else if(item.type[1] == "businessFormation"){
-            selectedBox.setAttribute("checked", "checked");
-        }else if(item.type[1] == "documentDrafting"){
-            $('caseType').setAttribute("checked", "checked");
+        var checkboxes = document.forms[0].caseType;
+        for(var b = 0; b < checkboxes.length; b++) {
+            if(checkboxes[b].value == "Immigration Law" && item.type[1] == "Immigration Law"){
+                checkboxes[b].setAttribute("checked", "checked");
+            }else if(checkboxes[b].value == "Business Formation" && item.type[1] == "Business Formation"){
+                checkboxes[b].setAttribute("checked", "checked");
+            }else if(checkboxes[b].value == "Document Drafting" && item.type[1] == "Document Drafting"){
+                checkboxes[b].setAttribute("checked", "checked");
+            }
         }
+        $('firstConsult').value = item.date[1];
+       // $('payment').value = item.payment[1];
+        var paidInFull = document.forms[0].payCheck;
+        for(var i = 0; i < paidInFull.length; i++) {
+            if(paidInFull[i].value == "Cash" && item.payment[1] == "Cash"){
+                paidInFull[i].setAttribute("checked", "checked");
+            }else if(paidInFull[i].value == "Visa" && item.payment[1] == "Visa"){
+                paidInFull[i].setAttribute("checked", "checked");
+            }else if(paidInFull[i].value == "AmericanExpress" && item.payment[1] == "AmericanExpress"){
+                paidInFull[i].setAttribute("checked", "checked");
+            }else if(paidInFull[i].value == "TravelersCheck" && item.payment[1] == "TravelersCheck"){
+                paidInFull[i].setAttribute("checked", "checked");
+            }
+        }
+        $('clientFeedback').value = item.notes[1];
         $('rating').value = item.app[1];
 
-
-
-        status = item.status[1];
+     /*   status = item.status[1];
         selectedBox = item.type[1];
         $('firstConsult').value = item.date[1];
         $('payment').value = item.payment[1];
         $('clientFeedback').value = item.notes[1];
-        $('rating').value = item.app[1];
+        $('rating').value = item.app[1];*/
 
     }
 
@@ -256,7 +271,7 @@ window.addEventListener("DOMContentLoaded", function () {
             eData.preventDefault();
             console.log(messageAry);
             console.log(txt.innerHTMl);
-            console.log($('errorLog').appendChild(txt))
+            console.log($('errorLog').appendChild(txt));
             return false;
         }else{
             //If no error messages run function to save data.
