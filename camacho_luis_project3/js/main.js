@@ -52,7 +52,7 @@ window.addEventListener("DOMContentLoaded", function () {
             //noinspection JSJQueryEfficiency
             $('addNew').style.display = "inline";
             //noinspection JSJQueryEfficiency
-            $('buttonProcess').style.display = "none";
+            //$('buttonProcess').style.display = "none";
         } else if (n == "off") {
             //noinspection JSJQueryEfficiency
             $('radioCheck').style.display = "block";
@@ -228,18 +228,21 @@ window.addEventListener("DOMContentLoaded", function () {
         var validateFname = $('firstName');
         var validateLname = $('lastName');
         var validateEname = $('email');
-     //   var validatePnumber = $('phoneNumber');
+        var validatePnumber = $('phoneNumber');
      //   var validateType = selectedBox;
-     //   var validateDate = $('firstConsult');
+        var validateDate = $('firstConsult');
 
         //Resetting Error Message Log
         errorLogs.innerHTML = "";
         validateFname.style.border = "1px solid black";
         validateLname.style.border = "1px solid black";
         validateEname.style.border = "1px solid black";
+        validatePnumber.style.border = "1px solid black";
+        validateDate.style.border = "1px solid black";
 
         //Get Error Messages
         var messageAry = [];
+
         //First Name Validation
         if(validateFname.value === ""){
             var firstNameErrorLog = "First Name Required.";
@@ -261,6 +264,22 @@ window.addEventListener("DOMContentLoaded", function () {
             validateEname.style.border = "1px solid red";
             messageAry.push(emailErrorLog);
         }
+
+        //Phone Number Validation
+        var pNumberReg = /^\(?(\d{3})\)?[\.\-\/ ]?(\d{3})[\.\-\/ ]?(\d{4})$/;
+        if(!(pNumberReg.exec(validatePnumber.value))){
+            var pNumberErrorLog = "Valid Phone Number is Required.";
+            validatePnumber.style.border = "1px solid red";
+            messageAry.push(pNumberErrorLog);
+        }
+
+        //Date Validation
+        if(validateDate.value === ""){
+            var dateErrorLog = "Initial Consultation Date Required.";
+            validateDate.style.border = "1px solid red";
+            messageAry.push(dateErrorLog);
+        }
+
         //If There were errors display them on screen.
         if(messageAry.length >= 1){
             for(var i =0; i<messageAry.length; i++){
@@ -271,7 +290,7 @@ window.addEventListener("DOMContentLoaded", function () {
             eData.preventDefault();
             console.log(messageAry);
             console.log(txt.innerHTMl);
-            console.log($('errorLog').appendChild(txt));
+            console.log(errorLogs.appendChild(txt));
             return false;
         }else{
             //If no error messages run function to save data.
