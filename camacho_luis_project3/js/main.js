@@ -63,17 +63,25 @@ window.addEventListener("DOMContentLoaded", function () {
             //noinspection JSJQueryEfficiency
             $('addNew').style.display = "none";
             //noinspection JSJQueryEfficiency
-            $('items').style.display = "block";
+            $('items').style.display = "none";
         } else {
             return false;
         }
     }
 
     //Accessing and storing Declared Variables
-    function storeData() {
-        var id = Math.floor(Math.random() * 10000002);
+    function storeData(key) {
+        //key creation only if new add new item.
+        if(!key){
+            var id = Math.floor(Math.random() * 10000002);
         //retrieve all data form fields value and store in an object.
         //Object properties contain array with the form label and input value.
+        }else{
+            //Keep the same key value for editing contact item.
+            //Key has been utilized throughout process. Key is from editSubmit event handler.
+            //to validator function and then to function storeData.
+            id = key;
+        }
         radioSelection();
         checkSelection();
         var item = {};
@@ -140,11 +148,11 @@ window.addEventListener("DOMContentLoaded", function () {
         editLink.innerHTML = editText;
         linksLi.appendChild(editLink);
 
-        //add line break
+        //line break added for edit and delete links
         var breakTag = document.createElement('br');
         linksLi.appendChild(breakTag);
 
-        //add delete single item link
+        //delete single item link created
         var deleteLink = document.createElement('a');
         deleteLink.href = "#";
         deleteLink.key = key;
@@ -154,12 +162,14 @@ window.addEventListener("DOMContentLoaded", function () {
         linksLi.appendChild(deleteLink);
     }
 
+    //Function used to edit individual items
     function editItem(){
         //Grab the data from our item from Local Storage.
         var value = localStorage.getItem(this.key);
         var item = JSON.parse(value);
         console.log(item);
-        //Show form
+
+        //Show form function
         toggleControls("off");
 
         //Populate the form fields with current localStorage values.
@@ -167,12 +177,12 @@ window.addEventListener("DOMContentLoaded", function () {
         $('lastName').value = item.lname[1];
         $('email').value = item.ename[1];
         $('phoneNumber').value = item.pnumber[1];
-        var radios = document.forms[0].client;
-        for(var a = 0; a < radios.length; a++) {
-            if(radios[a].value == "New Client" && item.status[1] == "New Client"){
-                radios[a].setAttribute("checked", "checked");
-            }else if(radios[a].value == "Existing Client" && item.status[1] == "Existing Client"){
-                radios[a].setAttribute("checked", "checked");
+        var radioOption = document.forms[0].client;
+        for(var a = 0; a < radioOption.length; a++) {
+            if(radioOption[a].value == "New Client" && item.status[1] == "New Client"){
+                radioOption[a].setAttribute("checked", "checked");
+            }else if(radioOption[a].value == "Existing Client" && item.status[1] == "Existing Client"){
+                radioOption[a].setAttribute("checked", "checked");
             }
         }
         var checkboxes = document.forms[0].caseType;
@@ -186,10 +196,12 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         }
         $('firstConsult').value = item.date[1];
-       // $('payment').value = item.payment[1];
+        //$('payment').value = item.payment[1];
         var paidInFull = document.forms[0].payCheck;
         for(var i = 0; i < paidInFull.length; i++) {
-            if(paidInFull[i].value == "Cash" && item.payment[1] == "Cash"){
+            if(paidInFull[i].value == "Payment Options" && item.payment[1] == "Payment Options"){
+                paidInFull[i].setAttribute("checked", "checked");
+            }else if(paidInFull[i].value == "Cash" && item.payment[1] == "Cash"){
                 paidInFull[i].setAttribute("checked", "checked");
             }else if(paidInFull[i].value == "Visa" && item.payment[1] == "Visa"){
                 paidInFull[i].setAttribute("checked", "checked");
@@ -201,6 +213,16 @@ window.addEventListener("DOMContentLoaded", function () {
         }
         $('clientFeedback').value = item.notes[1];
         $('rating').value = item.app[1];
+        //Removes the initial listener from Set Link & Submit Click Events
+        save.removeEventListener("click", storeData);
+        //Value altered for button in Set Link & Submit Click Events
+        $('buttonProcess').value = "Edit Contact";
+        var editSubmit = $('buttonProcess');
+        //key value created saved from this function as a property of the editSubmit
+        //further use of the this.key value when function calls to save data.
+        editSubmit.addEventListener("click", validator);
+        editSubmit.key = this.key;
+
 
      /*   status = item.status[1];
         selectedBox = item.type[1];
@@ -208,7 +230,6 @@ window.addEventListener("DOMContentLoaded", function () {
         $('payment').value = item.payment[1];
         $('clientFeedback').value = item.notes[1];
         $('rating').value = item.app[1];*/
-
     }
 
     //noinspection FunctionWithInconsistentReturnsJS
@@ -229,8 +250,8 @@ window.addEventListener("DOMContentLoaded", function () {
         var validateLname = $('lastName');
         var validateEname = $('email');
         var validatePnumber = $('phoneNumber');
-     //   var validateType = selectedBox;
         var validateDate = $('firstConsult');
+        var validatePayment = $('payment')
 
         //Resetting Error Message Log
         errorLogs.innerHTML = "";
@@ -239,6 +260,7 @@ window.addEventListener("DOMContentLoaded", function () {
         validateEname.style.border = "1px solid black";
         validatePnumber.style.border = "1px solid black";
         validateDate.style.border = "1px solid black";
+        validatePayment.style.border = "1px solid black";
 
         //Get Error Messages
         var messageAry = [];
@@ -280,6 +302,13 @@ window.addEventListener("DOMContentLoaded", function () {
             messageAry.push(dateErrorLog);
         }
 
+        //Payment Validation
+        if(validatePayment.value==="Payment Options"){
+            var paymentErrorLog = "Payment Option Required.";
+            validatePayment.style.border = "1px solid red";
+            messageAry.push(paymentErrorLog);
+        }
+
         //If There were errors display them on screen.
         if(messageAry.length >= 1){
             for(var i =0; i<messageAry.length; i++){
@@ -294,7 +323,8 @@ window.addEventListener("DOMContentLoaded", function () {
             return false;
         }else{
             //If no error messages run function to save data.
-            storeData();
+            //Key from getData function localStorage key item pair
+            storeData(this.key);
         }
     }
 

@@ -24,10 +24,14 @@
                 <h1>Case Manager</h1>
                 <h2>Attorney&#126;Client</h2>
             </hgroup>
-
         </header>
+            <nav>
+                <a href="#" id="clearStored">Clear Stored Data</a>
+                <a href="#" id="display">Display Data</a>
+                <a href="additem.html" id="addNew" style="display:none">Add New Client</a>
+            </nav>
         <section>
-            <form action="#" method="post" id="radioCheck">
+            <form action="#" method="post" id="radioCheck" autocomplete="off">
                 <fieldset>
                     <legend>Data for Initial Consultation</legend>
                     <ul id="errorLog"></ul>
@@ -83,13 +87,14 @@
                     <div>
                         <ul>
                             <li><label for="payment">Select Method of Payment</label>
-                                <select id="payment">
-                                    <optgroup label="Payment Options">
+                                <select id="payment" name="payCheck">
+                                    <!--optgroup label="Payment Options"-->
+                                        <option value="Payment Options">Payment Options</option>
                                         <option value="Cash">Cash</option>
                                         <option value="Visa">Visa</option>
                                         <option value="AmericanExpress">American Express</option>
                                         <option value="TravelersCheck">Travelers Check</option>
-                                    </optgroup>
+                                    <!--/optgroup-->
                                 </select>
                             </li>
                         </ul>
@@ -119,16 +124,10 @@
             </form>
         </section>
         <footer>
-
             <div>
-                <!--<input type="submit" id="buttonProcess" value="Begin Process"/-->
-                <button type="submit" id="buttonProcess">Select To Begin Process</button>
+                <input type="submit" id="buttonProcess" value="Select To Begin Process">
+                <!--button type="submit" id="buttonProcess" value="buttonProcess">Select To Begin Process</button-->
             </div>
-            <nav>
-                <a href="#" id="clearStored">Clear Stored Data</a>
-                <a href="#" id="display">Display Data</a>
-                <a href="additem.html" id="addNew" style="display:none">Add New Client</a>
-            </nav>
         </footer>
         <script src="js/json.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
