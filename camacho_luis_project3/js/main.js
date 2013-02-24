@@ -64,6 +64,7 @@ window.addEventListener("DOMContentLoaded", function () {
             $('addNew').style.display = "none";
             //noinspection JSJQueryEfficiency
             $('items').style.display = "none";
+            //noinspection JSJQueryEfficiency
             $('buttonProcess').style.display = "inline";
         } else {
             return false;
@@ -99,6 +100,7 @@ window.addEventListener("DOMContentLoaded", function () {
             item.app     = ["Rate App:", $('rating').value];
         //Save data to Local Storage: Use Stringify to convert our object to a string.
         //localStorage is a Key Value pair.
+        //noinspection JSValidateTypes
         localStorage.setItem(id, JSON.stringify(item));
         alert("Saving Data! Select Display Data Link Above To View Or Edit Data!");
     }
@@ -107,6 +109,8 @@ window.addEventListener("DOMContentLoaded", function () {
         //toggleControls("on");
         if (localStorage.length === 0) {
             alert("There is no Data in Local Storage.");
+        //testData function utilizes json.js file to populate the form with Data.
+        //For testing purposes.
         //testData();
         }else{
         //Write Data from local storage to the browser.
@@ -223,31 +227,24 @@ window.addEventListener("DOMContentLoaded", function () {
         }
         $('clientFeedback').value = item.notes[1];
         $('rating').value = item.app[1];
-
         //Removes the initial listener from Set Link & Submit Click Events
         save.removeEventListener("click", storeData);
         //Value altered for button in Set Link & Submit Click Events
+        //noinspection JSJQueryEfficiency
         $('buttonProcess').value = "Save Changes";
+        //noinspection JSJQueryEfficiency
         var editSubmit = $('buttonProcess');
         //key value created saved from this function as a property of the editSubmit event.
         //further use of the this.key value when function calls to edit the saved data.
         editSubmit.addEventListener("click", validator);
         editSubmit.key = this.key;
-
-
-     /*   status = item.status[1];
-        selectedBox = item.type[1];
-        $('firstConsult').value = item.date[1];
-        $('payment').value = item.payment[1];
-        $('clientFeedback').value = item.notes[1];
-        $('rating').value = item.app[1];*/
     }
 
     function deleteItem(){
-        var ask = confirm("Are you sure you want to delete Client Data?")
+        var ask = confirm("Are you sure you want to delete Client Data?");
         if(ask){
             localStorage.removeItem(this.key);
-            alert("Client Data Deletion Process Complete!")
+            alert("Client Data Deletion Process Complete!");
             window.location.reload();
         }else{
             alert("Client Deletion Process Canceled.")
@@ -266,6 +263,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    //noinspection FunctionWithInconsistentReturnsJS
     function validator(eData){
         //Define the elements to be checked
         var validateFname = $('firstName');
@@ -273,8 +271,7 @@ window.addEventListener("DOMContentLoaded", function () {
         var validateEname = $('email');
         var validatePnumber = $('phoneNumber');
         var validateDate = $('firstConsult');
-        var validatePayment = $('payment')
-
+        var validatePayment = $('payment');
         //Resetting Error Message Log
         //var errorLogs = $('errorLog'); is error messages from validator function.
         errorLogs.innerHTML = "";
@@ -284,10 +281,8 @@ window.addEventListener("DOMContentLoaded", function () {
         validatePnumber.style.border = "#f2f2f2";
         validateDate.style.border    = "#f2f2f2";
         validatePayment.style.border = "#f2f2f2";
-
         //Get Error Messages
         var messageAry = [];
-
         //First Name Validation
         if(validateFname.value === ""){
             //Generates and stores an error message in var.
@@ -358,7 +353,9 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-   /* function testData(){
+    //testData function utilizes json.js file to populate the form with Data.
+    //For testing purposes.
+/*  function testData(){
         for(var n in json){
             var id = Math.floor(Math.random()*10000002);
             //noinspection JSValidateTypes,JSUnfilteredForInLoop
