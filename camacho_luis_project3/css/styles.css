@@ -19,6 +19,9 @@ header {
         padding: 10px 0;
         position: relative;
 }
+body {
+      background-color: rgba(239, 229, 208, 0.68);
+}
 article {
          border: 3px double #034001;
          text-align: center;

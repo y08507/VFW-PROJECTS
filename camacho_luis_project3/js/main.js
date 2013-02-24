@@ -275,12 +275,12 @@ window.addEventListener("DOMContentLoaded", function () {
         //Resetting Error Message Log
         //var errorLogs = $('errorLog'); is error messages from validator function.
         errorLogs.innerHTML = "";
-        validateFname.style.border   = "#f2f2f2";
-        validateLname.style.border   = "#f2f2f2";
-        validateEname.style.border   = "#f2f2f2";
-        validatePnumber.style.border = "#f2f2f2";
-        validateDate.style.border    = "#f2f2f2";
-        validatePayment.style.border = "#f2f2f2";
+        validateFname.style.border   = "1px solid grey";
+        validateLname.style.border   = "1px solid grey";
+        validateEname.style.border   = "1px solid grey";
+        validatePnumber.style.border = "1px solid grey";
+        validateDate.style.border    = "1px solid grey";
+        validatePayment.style.border = "1px solid grey";
         //Get Error Messages
         var messageAry = [];
         //First Name Validation
