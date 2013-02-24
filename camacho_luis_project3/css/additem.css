@@ -30,7 +30,6 @@ a:hover{
 }
 body {
       background-color: rgba(239, 229, 208, 0.68);
-
 }
 label {
        display: inline-block;
@@ -51,7 +50,11 @@ fieldset {
 footer {
             text-align: center;
 }
-footer div {
+footer div{}
+
+input[type="submit"]  {
+
+
         background-image: linear-gradient(bottom, #034001 45%);
         background-image: -o-linear-gradient(bottom, #034001 45%);
         background-image: -moz-linear-gradient(bottom, #034001 45%);
@@ -66,7 +69,7 @@ footer div {
         );
         display: inline-block;
         outline: none;
-        cursor: progress;
+        cursor: pointer;
         text-align: center;
         text-decoration: none;
         /*font: 14px/100% Arial, Helvetica, sans-serif;*/

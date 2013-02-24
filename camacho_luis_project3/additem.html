@@ -3,7 +3,7 @@
     Created for: VFW 1302
     Project 3-->
 
-<html xmlns="http://www.w3.org/1999/html">
+<html>
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content="Attorney &#126; Client App is a management system which tracks and streamlines updates about the Case"/>
@@ -31,7 +31,7 @@
                 <a href="additem.html" id="addNew" style="display:none">Add New Client</a>
             </nav>
         <section>
-            <form action="#" method="post" id="radioCheck" autocomplete="off">
+            <form action="#" method="post" id="radioCheck" autocomplete="on">
                 <fieldset>
                     <legend>Data for Initial Consultation</legend>
                     <ul id="errorLog"></ul>
@@ -121,15 +121,14 @@
                         </ul>
                     </div>
                 </fieldset>
+                 <footer>
+                    <div>
+                        <input type="submit" id="buttonProcess" value="Select To Begin Processing Data">
+                    </div>
+                 </footer>
             </form>
         </section>
-        <footer>
-            <div>
-                <input type="submit" id="buttonProcess" value="Select To Begin Process">
-                <!--button type="submit" id="buttonProcess" value="buttonProcess">Select To Begin Process</button-->
-            </div>
-        </footer>
-        <script src="js/json.js"></script>
+        <!--script src="js/json.js"></script-->
         <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>

@@ -52,7 +52,7 @@ window.addEventListener("DOMContentLoaded", function () {
             //noinspection JSJQueryEfficiency
             $('addNew').style.display = "inline";
             //noinspection JSJQueryEfficiency
-            //$('buttonProcess').style.display = "none";
+            $('buttonProcess').style.display = "none";
         } else if (n == "off") {
             //noinspection JSJQueryEfficiency
             $('radioCheck').style.display = "block";
@@ -64,16 +64,18 @@ window.addEventListener("DOMContentLoaded", function () {
             $('addNew').style.display = "none";
             //noinspection JSJQueryEfficiency
             $('items').style.display = "none";
+            $('buttonProcess').style.display = "inline";
         } else {
             return false;
         }
     }
 
     //Accessing and storing Declared Variables
+    //localStorage is a Key Value pair.
     function storeData(key) {
-        //key creation only if new add new item.
+        //key creation only if new item, then generate key.
         if(!key){
-            var id = Math.floor(Math.random() * 10000002);
+            var id = Math.floor(Math.random()*10000002);
         //retrieve all data form fields value and store in an object.
         //Object properties contain array with the form label and input value.
         }else{
@@ -84,28 +86,29 @@ window.addEventListener("DOMContentLoaded", function () {
         }
         radioSelection();
         checkSelection();
-        var item = {};
-        item.fname = ["First Name:", $('firstName').value];
-        item.lname = ["Last Name:", $('lastName').value];
-        item.ename = ["E-Mail Address:", $('email').value];
-        item.pnumber = ["Phone Number:", $('phoneNumber').value];
-        item.status = ["Client Status:", status];
-        item.type = ["Case Type:", selectedBox];
-        item.date = ["Consultation Date:", $('firstConsult').value];
-        item.payment = ["Method of Payment:", $('payment').value];
-        item.notes = ["Client Comments:", $('clientFeedback').value];
-        item.app = ["Rate App:", $('rating').value];
+        var item         = {};
+            item.fname   = ["First Name:", $('firstName').value];
+            item.lname   = ["Last Name:", $('lastName').value];
+            item.ename   = ["E-Mail Address:", $('email').value];
+            item.pnumber = ["Phone Number:", $('phoneNumber').value];
+            item.status  = ["Client Status:", status];
+            item.type    = ["Case Type:", selectedBox];
+            item.date    = ["Consultation Date:", $('firstConsult').value];
+            item.payment = ["Method of Payment:", $('payment').value];
+            item.notes   = ["Client Comments:", $('clientFeedback').value];
+            item.app     = ["Rate App:", $('rating').value];
         //Save data to Local Storage: Use Stringify to convert our object to a string.
+        //localStorage is a Key Value pair.
         localStorage.setItem(id, JSON.stringify(item));
-        alert("Processing Data!");
+        alert("Saving Data! Select Display Data Link Above To View Or Edit Data!");
     }
 
-    function getData() {
+    function getData(){
         //toggleControls("on");
         if (localStorage.length === 0) {
-            alert("There is no data in Local Storage. Loading Data for Testing.");
-        testData();
-        }
+            alert("There is no Data in Local Storage.");
+        //testData();
+        }else{
         //Write Data from local storage to the browser.
         toggleControls("on");
         var makeDiv = document.createElement('div');
@@ -116,7 +119,7 @@ window.addEventListener("DOMContentLoaded", function () {
         $('items').style.display = "block";
         for (var i = 0, len = localStorage.length; i < len; i++) {
             var makeli = document.createElement('li');
-            var linksLi = document.createElement('li');
+            var newLinksLi = document.createElement('li');
             makeList.appendChild(makeli);
             var key = localStorage.key(i);
             var value = localStorage.getItem(key);
@@ -130,44 +133,51 @@ window.addEventListener("DOMContentLoaded", function () {
                 makeSublist.appendChild(makeSubli);
                 //noinspection JSUnfilteredForInLoop
                 makeSubli.innerHTML = obj[n][0] + " " + obj[n][1];
-                makeSublist.appendChild(linksLi);
+                makeSublist.appendChild(newLinksLi);
                 //$('items').style.display = "block";
+                console.log(key);
             }
-            makeItemLinks(localStorage.key(i), linksLi);//Create our edit and delete buttons
+            makeItemLinks(localStorage.key(i), newLinksLi);//Create our edit and delete buttons
+        }
         }
     }
-    // Make Item Links
-    // Create the edit and delete for each stored item when displayed.
-    function makeItemLinks(key, linksLi){
+
+    // Make Item Links function
+    // Create the edit and delete for each stored item when displayed in browser.
+    function makeItemLinks(key, newLinksLi){
         //add edit single item link
         var editLink = document.createElement('a');
         editLink.href = "#";
         editLink.key = key;
-        var editText = "Edit Contact";
+        var editText = "Edit Client Data";
+        //Accesses the stored key value in editLink.key = key
         editLink.addEventListener("click", editItem);
         editLink.innerHTML = editText;
-        linksLi.appendChild(editLink);
+        newLinksLi.appendChild(editLink);
 
         //line break added for edit and delete links
         var breakTag = document.createElement('br');
-        linksLi.appendChild(breakTag);
+        newLinksLi.appendChild(breakTag);
 
         //delete single item link created
         var deleteLink = document.createElement('a');
         deleteLink.href = "#";
         deleteLink.key = key;
-        var deleteText = "Delete Contact";
-        //deleteLink.addEventListener("click", deleteItem);
+        var deleteText = "Delete Client Data";
+        deleteLink.addEventListener("click", deleteItem);
         deleteLink.innerHTML = deleteText;
-        linksLi.appendChild(deleteLink);
+        newLinksLi.appendChild(deleteLink);
     }
 
     //Function used to edit individual items
     function editItem(){
-        //Grab the data from our item from Local Storage.
+        //Grab the data from stored items JSON.stringify(item) in Local Storage.
+        //this.key is the same as editLink.key
         var value = localStorage.getItem(this.key);
+        //JSON.parse(value) converts JSON.stringify(item)
         var item = JSON.parse(value);
         console.log(item);
+        console.log(this.key);
 
         //Show form function
         toggleControls("off");
@@ -196,7 +206,7 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         }
         $('firstConsult').value = item.date[1];
-        //$('payment').value = item.payment[1];
+        $('payment').value = item.payment[1];
         var paidInFull = document.forms[0].payCheck;
         for(var i = 0; i < paidInFull.length; i++) {
             if(paidInFull[i].value == "Payment Options" && item.payment[1] == "Payment Options"){
@@ -213,13 +223,14 @@ window.addEventListener("DOMContentLoaded", function () {
         }
         $('clientFeedback').value = item.notes[1];
         $('rating').value = item.app[1];
+
         //Removes the initial listener from Set Link & Submit Click Events
         save.removeEventListener("click", storeData);
         //Value altered for button in Set Link & Submit Click Events
-        $('buttonProcess').value = "Edit Contact";
+        $('buttonProcess').value = "Save Changes";
         var editSubmit = $('buttonProcess');
-        //key value created saved from this function as a property of the editSubmit
-        //further use of the this.key value when function calls to save data.
+        //key value created saved from this function as a property of the editSubmit event.
+        //further use of the this.key value when function calls to edit the saved data.
         editSubmit.addEventListener("click", validator);
         editSubmit.key = this.key;
 
@@ -232,13 +243,24 @@ window.addEventListener("DOMContentLoaded", function () {
         $('rating').value = item.app[1];*/
     }
 
+    function deleteItem(){
+        var ask = confirm("Are you sure you want to delete Client Data?")
+        if(ask){
+            localStorage.removeItem(this.key);
+            alert("Client Data Deletion Process Complete!")
+            window.location.reload();
+        }else{
+            alert("Client Deletion Process Canceled.")
+        }
+    }
+
     //noinspection FunctionWithInconsistentReturnsJS
     function clearLocal(){
         if(localStorage.length === 0){
             alert("There is no data to clear.")
         }else{
             localStorage.clear();
-            alert("All contacts are deleted!");
+            alert("All Client Data Has Been Deleted!");
             window.location.reload();
         return false;
         }
@@ -254,19 +276,21 @@ window.addEventListener("DOMContentLoaded", function () {
         var validatePayment = $('payment')
 
         //Resetting Error Message Log
+        //var errorLogs = $('errorLog'); is error messages from validator function.
         errorLogs.innerHTML = "";
-        validateFname.style.border = "1px solid black";
-        validateLname.style.border = "1px solid black";
-        validateEname.style.border = "1px solid black";
-        validatePnumber.style.border = "1px solid black";
-        validateDate.style.border = "1px solid black";
-        validatePayment.style.border = "1px solid black";
+        validateFname.style.border   = "#f2f2f2";
+        validateLname.style.border   = "#f2f2f2";
+        validateEname.style.border   = "#f2f2f2";
+        validatePnumber.style.border = "#f2f2f2";
+        validateDate.style.border    = "#f2f2f2";
+        validatePayment.style.border = "#f2f2f2";
 
         //Get Error Messages
         var messageAry = [];
 
         //First Name Validation
         if(validateFname.value === ""){
+            //Generates and stores an error message in var.
             var firstNameErrorLog = "First Name Required.";
             validateFname.style.border = "1px solid red";
             messageAry.push(firstNameErrorLog);
@@ -274,6 +298,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
         //Last Name Validation
         if(validateLname.value === ""){
+            //Generates and stores an error message in var.
             var lastNameErrorLog = "Last Name Required.";
             validateLname.style.border = "1px solid red";
             messageAry.push(lastNameErrorLog);
@@ -282,6 +307,7 @@ window.addEventListener("DOMContentLoaded", function () {
         //Email Validation
         var emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if(!(emailReg.exec(validateEname.value))){
+            //Generates and stores an error message in var.
             var emailErrorLog = "Valid Email Address Required.";
             validateEname.style.border = "1px solid red";
             messageAry.push(emailErrorLog);
@@ -309,32 +335,36 @@ window.addEventListener("DOMContentLoaded", function () {
             messageAry.push(paymentErrorLog);
         }
 
-        //If There were errors display them on screen.
+        //If there were errors display them on screen.
         if(messageAry.length >= 1){
             for(var i =0; i<messageAry.length; i++){
                 var txt = document.createElement('li');
-                txt.innerHTMl = messageAry[i];
+                //Debugging due to improperly writing a Javascript Property (case sensitive)
+                //innerHTMl caused hours of debugging. After review of main.js file by Mr.Lewis issue was discovered, resolved.
+                txt.innerHTML = messageAry[i];
                 errorLogs.appendChild(txt);
             }
             eData.preventDefault();
             console.log(messageAry);
-            console.log(txt.innerHTMl);
+            console.log(txt.innerHTML);
             console.log(errorLogs.appendChild(txt));
             return false;
         }else{
             //If no error messages run function to save data.
+            //Send the key value, which came from the editItem function.
+            //Remember this key value was passed through the edit event listener as a property (editSubmit.key = this.key;).
             //Key from getData function localStorage key item pair
             storeData(this.key);
         }
     }
 
-    function testData(){
+   /* function testData(){
         for(var n in json){
             var id = Math.floor(Math.random()*10000002);
             //noinspection JSValidateTypes,JSUnfilteredForInLoop
             localStorage.setItem(id, JSON.stringify(json[n]));
         }
-    }
+    }*/
 
     //Variable defaults
     var status;
@@ -348,6 +378,7 @@ window.addEventListener("DOMContentLoaded", function () {
         clearLink.addEventListener("click", clearLocal);
     var save = $('buttonProcess');
         save.addEventListener("click", validator);
+
 });
 
 
