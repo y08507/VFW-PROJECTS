@@ -13,9 +13,9 @@
 window.addEventListener("DOMContentLoaded", function () {
 
     //getElement by ID Function
-    function $(x) {
+    function g(e) {
         var theElement;
-        theElement = document.getElementById(x);
+        theElement = document.getElementById(e);
         return theElement;
     }
 
@@ -44,28 +44,28 @@ window.addEventListener("DOMContentLoaded", function () {
     function toggleControls(n) {
         if (n == "on") {
             //noinspection JSJQueryEfficiency
-            $('radioCheck').style.display = "none";
+            g('radioCheck').style.display = "none";
             //noinspection JSJQueryEfficiency
-            $('clearStored').style.display = "inline";
+            g('clearStored').style.display = "inline";
             //noinspection JSJQueryEfficiency
-            $('display').style.display = "none";
+            g('display').style.display = "none";
             //noinspection JSJQueryEfficiency
-            $('addNew').style.display = "inline";
+            g('addNew').style.display = "inline";
             //noinspection JSJQueryEfficiency
-            $('buttonProcess').style.display = "none";
+            g('buttonProcess').style.display = "none";
         } else if (n == "off") {
             //noinspection JSJQueryEfficiency
-            $('radioCheck').style.display = "block";
+            g('radioCheck').style.display = "block";
             //noinspection JSJQueryEfficiency
-            $('clearStored').style.display = "inline";
+            g('clearStored').style.display = "inline";
             //noinspection JSJQueryEfficiency
-            $('display').style.display = "inline";
+            g('display').style.display = "inline";
             //noinspection JSJQueryEfficiency
-            $('addNew').style.display = "none";
+            g('addNew').style.display = "none";
             //noinspection JSJQueryEfficiency
-            $('items').style.display = "none";
+            g('items').style.display = "none";
             //noinspection JSJQueryEfficiency
-            $('buttonProcess').style.display = "inline";
+            g('buttonProcess').style.display = "inline";
         } else {
             return false;
         }
@@ -88,16 +88,16 @@ window.addEventListener("DOMContentLoaded", function () {
         radioSelection();
         checkSelection();
         var item         = {};
-            item.fname   = ["First Name:", $('firstName').value];
-            item.lname   = ["Last Name:", $('lastName').value];
-            item.ename   = ["E-Mail Address:", $('email').value];
-            item.pnumber = ["Phone Number:", $('phoneNumber').value];
+            item.fname   = ["First Name:", g('firstName').value];
+            item.lname   = ["Last Name:", g('lastName').value];
+            item.ename   = ["E-Mail Address:", g('email').value];
+            item.pnumber = ["Phone Number:", g('phoneNumber').value];
             item.status  = ["Client Status:", status];
             item.type    = ["Case Type:", selectedBox];
-            item.date    = ["Consultation Date:", $('firstConsult').value];
-            item.payment = ["Method of Payment:", $('payment').value];
-            item.notes   = ["Client Comments:", $('clientFeedback').value];
-            item.app     = ["Rate App:", $('rating').value];
+            item.date    = ["Consultation Date:", g('firstConsult').value];
+            item.payment = ["Method of Payment:", g('payment').value];
+            item.notes   = ["Client Comments:", g('clientFeedback').value];
+            item.app     = ["Rate App:", g('rating').value];
         //Save data to Local Storage: Use Stringify to convert our object to a string.
         //localStorage is a Key Value pair.
         //noinspection JSValidateTypes
@@ -106,21 +106,22 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
     function getData(){
-        //toggleControls("on");
+        toggleControls("on");
+
         if (localStorage.length === 0) {
-            alert("There is no Data in Local Storage.");
+            alert("There is no Data in Local Storage. Test Data Being Loaded");
         //testData function utilizes json.js file to populate the form with Data.
         //For testing purposes.
-        //testData();
-        }else{
+        testData();
+        }
         //Write Data from local storage to the browser.
-        toggleControls("on");
+        //toggleControls("on");
         var makeDiv = document.createElement('div');
         makeDiv.setAttribute("id", "items");
         var makeList = document.createElement('ul');
         makeDiv.appendChild(makeList);
         document.body.appendChild(makeDiv);
-        $('items').style.display = "block";
+        g('items').style.border = "block";
         for (var i = 0, len = localStorage.length; i < len; i++) {
             var makeli = document.createElement('li');
             var newLinksLi = document.createElement('li');
@@ -132,19 +133,34 @@ window.addEventListener("DOMContentLoaded", function () {
             obj = JSON.parse(value);
             var makeSublist = document.createElement('ul');
             makeli.appendChild(makeSublist);
+            clientStatus(obj.status[1], makeSublist);
             for (var n in obj) {
                 var makeSubli = document.createElement('li');
                 makeSublist.appendChild(makeSubli);
                 //noinspection JSUnfilteredForInLoop
                 makeSubli.innerHTML = obj[n][0] + " " + obj[n][1];
                 makeSublist.appendChild(newLinksLi);
-                //$('items').style.display = "block";
+                //g('items').style.display = "block";
                 console.log(key);
             }
-            makeItemLinks(localStorage.key(i), newLinksLi);//Create our edit and delete buttons
-        }
+            //Create our edit and delete buttons
+            makeItemLinks(localStorage.key(i), newLinksLi);
+            //Create horizontal rule to separate items in edit list
+            var separate = document.createElement('hr');
+            separate.setAttribute("id","editItemSeparator");
+            makeSublist.appendChild(separate);
         }
     }
+    //Get the image for the right client type
+    function clientStatus(clientType,makeSublist){
+        var imageLi = document.createElement('li');
+        makeSublist.appendChild(imageLi);
+        var newImg = document.createElement('img');
+        newImg.setAttribute("src", "img/"+clientType+".png");
+        imageLi.appendChild(newImg);
+        console.log(clientType);
+    }
+
 
     // Make Item Links function
     // Create the edit and delete for each stored item when displayed in browser.
@@ -187,15 +203,15 @@ window.addEventListener("DOMContentLoaded", function () {
         toggleControls("off");
 
         //Populate the form fields with current localStorage values.
-        $('firstName').value = item.fname[1];
-        $('lastName').value = item.lname[1];
-        $('email').value = item.ename[1];
-        $('phoneNumber').value = item.pnumber[1];
+        g('firstName').value = item.fname[1];
+        g('lastName').value = item.lname[1];
+        g('email').value = item.ename[1];
+        g('phoneNumber').value = item.pnumber[1];
         var radioOption = document.forms[0].client;
         for(var a = 0; a < radioOption.length; a++) {
-            if(radioOption[a].value == "New Client" && item.status[1] == "New Client"){
+            if(radioOption[a].value == "NewClient" && item.status[1] == "NewClient"){
                 radioOption[a].setAttribute("checked", "checked");
-            }else if(radioOption[a].value == "Existing Client" && item.status[1] == "Existing Client"){
+            }else if(radioOption[a].value == "ExistingClient" && item.status[1] == "ExistingClient"){
                 radioOption[a].setAttribute("checked", "checked");
             }
         }
@@ -209,31 +225,17 @@ window.addEventListener("DOMContentLoaded", function () {
                 checkboxes[b].setAttribute("checked", "checked");
             }
         }
-        $('firstConsult').value = item.date[1];
-        $('payment').value = item.payment[1];
-        var paidInFull = document.forms[0].payCheck;
-        for(var i = 0; i < paidInFull.length; i++) {
-            if(paidInFull[i].value == "Payment Options" && item.payment[1] == "Payment Options"){
-                paidInFull[i].setAttribute("checked", "checked");
-            }else if(paidInFull[i].value == "Cash" && item.payment[1] == "Cash"){
-                paidInFull[i].setAttribute("checked", "checked");
-            }else if(paidInFull[i].value == "Visa" && item.payment[1] == "Visa"){
-                paidInFull[i].setAttribute("checked", "checked");
-            }else if(paidInFull[i].value == "AmericanExpress" && item.payment[1] == "AmericanExpress"){
-                paidInFull[i].setAttribute("checked", "checked");
-            }else if(paidInFull[i].value == "TravelersCheck" && item.payment[1] == "TravelersCheck"){
-                paidInFull[i].setAttribute("checked", "checked");
-            }
-        }
-        $('clientFeedback').value = item.notes[1];
-        $('rating').value = item.app[1];
+        g('firstConsult').value = item.date[1];
+        g('payment').value = item.payment[1];
+        g('clientFeedback').value = item.notes[1];
+        g('rating').value = item.app[1];
         //Removes the initial listener from Set Link & Submit Click Events
         save.removeEventListener("click", storeData);
         //Value altered for button in Set Link & Submit Click Events
         //noinspection JSJQueryEfficiency
-        $('buttonProcess').value = "Save Changes";
+        g('buttonProcess').value = "Save Changes";
         //noinspection JSJQueryEfficiency
-        var editSubmit = $('buttonProcess');
+        var editSubmit = g('buttonProcess');
         //key value created saved from this function as a property of the editSubmit event.
         //further use of the this.key value when function calls to edit the saved data.
         editSubmit.addEventListener("click", validator);
@@ -266,14 +268,14 @@ window.addEventListener("DOMContentLoaded", function () {
     //noinspection FunctionWithInconsistentReturnsJS
     function validator(eData){
         //Define the elements to be checked
-        var validateFname = $('firstName');
-        var validateLname = $('lastName');
-        var validateEname = $('email');
-        var validatePnumber = $('phoneNumber');
-        var validateDate = $('firstConsult');
-        var validatePayment = $('payment');
+        var validateFname = g('firstName');
+        var validateLname = g('lastName');
+        var validateEname = g('email');
+        var validatePnumber = g('phoneNumber');
+        var validateDate = g('firstConsult');
+        var validatePayment = g('payment');
         //Resetting Error Message Log
-        //var errorLogs = $('errorLog'); is error messages from validator function.
+        //var errorLogs = g('errorLog'); is error messages from validator function.
         errorLogs.innerHTML = "";
         validateFname.style.border   = "1px solid grey";
         validateLname.style.border   = "1px solid grey";
@@ -317,7 +319,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
 
         //Date Validation
-        if(validateDate.value === ""){
+        if(validateDate.value ===""){
             var dateErrorLog = "Initial Consultation Date Required.";
             validateDate.style.border = "1px solid red";
             messageAry.push(dateErrorLog);
@@ -354,26 +356,27 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
     //testData function utilizes json.js file to populate the form with Data.
+    //script loaded in html file
     //For testing purposes.
-/*  function testData(){
+    function testData(){
         for(var n in json){
             var id = Math.floor(Math.random()*10000002);
             //noinspection JSValidateTypes,JSUnfilteredForInLoop
             localStorage.setItem(id, JSON.stringify(json[n]));
         }
-    }*/
+    }
 
     //Variable defaults
     var status;
     var selectedBox;
-    var errorLogs = $('errorLog');
+    var errorLogs = g('errorLog');
 
     //Set Link & Submit Click Events
-    var displayLink = $('display');
+    var displayLink = g('display');
         displayLink.addEventListener("click", getData);
-    var clearLink = $('clearStored');
+    var clearLink = g('clearStored');
         clearLink.addEventListener("click", clearLocal);
-    var save = $('buttonProcess');
+    var save = g('buttonProcess');
         save.addEventListener("click", validator);
 
 });

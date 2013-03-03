@@ -18,12 +18,14 @@ header {
         margin: 5px 5px 9px 5px;
         padding: 10px 0;
         position: relative;
+        border-radius: 15px;
 }
 body {
       background-color: rgba(239, 229, 208, 0.68);
 }
 article {
          border: 3px double #034001;
+         border-radius: 15px;
          text-align: center;
          color: #3C593B;
          background-color: #F2F2F2;
