@@ -1,0 +1,124 @@
+/*
+Author: Luis Camacho Jr.
+VFW
+Term: 1302
+Project 4
+*/
+
+header {
+        display: block;
+        text-decoration: none;
+        text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.5);
+        border: 5px double;
+        color: #fff;
+        background-color: #034001;
+        text-align: center;
+        font-family: syncopate, serif;
+        font-size: 14px;
+        margin: 5px 5px 9px 5px;
+        padding: 10px 0;
+        position: relative;
+        border-radius: 15px;
+}
+nav {
+     text-align: center;
+     color: #034001;
+     font-family: syncopate, serif;
+     text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.5);
+}
+a:hover{
+        color: #adff2f;
+}
+body {
+      background-color: rgba(239, 229, 208, 0.68);
+
+}
+div#items ul {
+              list-style: none;
+              padding:14px;
+
+}
+#editItemSeparator {
+
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 5px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+label {
+       display: inline-block;
+       font-family: syncopate, serif;
+       font-size: 11px;
+       font-weight: normal;
+}
+fieldset {
+          margin: 5px 5px 9px 5px;
+          border: 5px double;
+          color: #034001;
+          background-color: #f2f2f2;
+          font-family: syncopate, serif;
+          font-weight: bold;
+          text-transform: uppercase;
+          font-size: 11px;
+    border-radius: 15px;
+}
+footer {
+        text-align: center;
+}
+input[type="submit"]  {
+                       background-image: linear-gradient(bottom, #034001 45%);
+                       background-image: -o-linear-gradient(bottom, #034001 45%);
+                       background-image: -moz-linear-gradient(bottom, #034001 45%);
+                       background-image: -webkit-linear-gradient(bottom, #034001 45%);
+                       background-image: -ms-linear-gradient(bottom, #034001 45%);
+                       background-image: -webkit-gradient(
+                       linear,
+                       left bottom,
+                       left top,
+                       color-stop(0.45, #034001)
+                       );
+                       display: inline-block;
+                       outline: none;
+                       cursor: pointer;
+                       text-align: center;
+                       text-decoration: none;
+                       text-shadow: 0 1px 1px rgba(0,0,0,.3);
+                       -webkit-border-radius: .5em;
+                       -moz-border-radius: .5em;
+                       border-radius: .5em;
+                       -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                       -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                       box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                       color: #ffffff;
+                       font-family: syncopate, serif;
+                       font-size: 14px;
+                       font-weight: bold;
+}
+#errorLog {
+          color: red;
+}
+

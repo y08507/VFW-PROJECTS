@@ -23,8 +23,8 @@ window.addEventListener("DOMContentLoaded", function () {
     function radioSelection() {
         //noinspection JSUnresolvedVariable
         var clientStatus = document.getElementById("radioCheck").client;
-        for (var i = 0; i < clientStatus.length; i++) {
-            if (clientStatus[i].checked) {
+        for(var i = 0; i < clientStatus.length; i++){
+            if(clientStatus[i].checked){
                 status = clientStatus[i].value;
             }
         }
@@ -32,13 +32,23 @@ window.addEventListener("DOMContentLoaded", function () {
 
     function checkSelection() {
         //noinspection JSUnresolvedVariable
-        var checkedBox = document.getElementById("radioCheck").caseType;
-        for (var i = 0; i < checkedBox.length; i++) {
-            if (checkedBox[i].checked) {
-                selectedBox = checkedBox[i].value;
+        var checkBoxes = document.getElementById("radioCheck").caseType;
+        var checkedBox = [];
+  //      var unchecked = [];
+        for(var i = 0; i < checkBoxes.length; i++){
+            if(checkBoxes[i].checked){
+                checkedBox.push(checkBoxes[i].value);
+                selectedBox = checkedBox+" ";
+              //  if(checkBoxes[i].checked == false){
+               //     unchecked.push(checkBoxes[i]);
+          //      }
+
             }
         }
+
+        console.log(checkedBox)
     }
+
 
     //noinspection FunctionWithInconsistentReturnsJS
     function toggleControls(n) {
@@ -103,6 +113,7 @@ window.addEventListener("DOMContentLoaded", function () {
         //noinspection JSValidateTypes
         localStorage.setItem(id, JSON.stringify(item));
         alert("Saving Data! Select Display Data Link Above To View Or Edit Data!");
+        console.log(selectedBox);
     }
 
     function getData(){
@@ -370,6 +381,7 @@ window.addEventListener("DOMContentLoaded", function () {
     var status;
     var selectedBox;
     var errorLogs = g('errorLog');
+
 
     //Set Link & Submit Click Events
     var displayLink = g('display');

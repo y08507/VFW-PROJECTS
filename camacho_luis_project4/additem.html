@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--Author: Luis Camacho Jr.
+    Created for: VFW 1302
+    Project 4-->
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Attorney &#126; Client App is a management system which tracks and streamlines updates about the Case"/>
+        <meta name="keywords" content="Attorney, Case log, Clients" />
+        <meta name="robots" content="noindex, nofollow"/>
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+        <meta name="viewport" content="target-densitydpi=device-dpi" />
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="MobileOptimized" content="320"/>
+        <title>Case Manager</title>
+        <link rel="stylesheet" href="css/additem.css"/>
+        <script src="http://use.edgefonts.net/syncopate.js"></script>
+
+    </head>
+    <body>
+        <header>
+            <hgroup>
+                <h1>Case Manager</h1>
+                <h2>Attorney&#126;Client</h2>
+            </hgroup>
+        </header>
+            <nav>
+                <a href="#" id="clearStored">Clear Stored Data</a>
+                <a href="#" id="display">Display Data</a>
+                <a href="additem.html" id="addNew" style="display:none">Add New Client</a>
+            </nav>
+        <section>
+            <form action="#" method="post" id="radioCheck" autocomplete="on">
+                <fieldset>
+                    <legend>Data for Initial Consultation</legend>
+                    <ul id="errorLog"></ul>
+                    <ul id="questions"></ul>
+                    <div>
+                        <ul>
+                            <li>Client:
+                                <ul>
+                                    <li><label for="firstName">First Name:</label>
+                                        <input type="text" name="clientName" id="firstName" placeholder="First Name"></li>
+                                    <li><label for="lastName">Last Name:</label>
+                                        <input type="text" name="clientName" id="lastName" placeholder="Last Name"></li>
+                                    <li><label for="email">E-Mail Address:</label>
+                                        <input type="email" name="clientName" id="email" placeholder="E-Mail Address"></li>
+                                    <li><label for="phoneNumber">Phone Number:</label>
+                                        <input type="tel" name="clientName" id="phoneNumber" placeholder="Phone Number"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                        <li>New or Existing Client?:
+                                <ul>
+                                    <li><label for="NewClient">New Client</label>
+                                        <input type="radio" checked value="NewClient" id="NewClient" name="client"></li>
+                                    <li><label for="ExistingClient">Existing Client</label>
+                                        <input type="radio" value="ExistingClient" id="ExistingClient" name="client"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>Type of Case:
+                                <ul>
+                                    <li><label for="immigrationLaw">Immigration Law</label>
+                                        <input type="checkbox" value="Immigration Law" name="caseType" id="immigrationLaw"></li>
+                                    <li><label for="businessFormation">Business Formation</label>
+                                        <input type="checkbox" value="Business Formation" name="caseType" id="businessFormation"></li>
+                                    <li><label for="documentDrafting">Document Drafting</label>
+                                        <input type="checkbox" value="Document Drafting" name="caseType" id="documentDrafting"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li><label for="firstConsult">Schedule Consultation:</label>
+                                <input type="date" name="date" id="firstConsult"></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li><label for="payment">Select Method of Payment</label>
+                                <select id="payment" name="payCheck">
+                                    <!--optgroup label="Payment Options"-->
+                                        <option value="Payment Options">Payment Options</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Visa">Visa</option>
+                                        <option value="AmericanExpress">American Express</option>
+                                        <option value="TravelersCheck">Travelers Check</option>
+                                    <!--/optgroup-->
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Client Feedback</legend>
+                    <div>
+                        <ul>
+                            <li><label for="clientFeedback">Client Comments:</label>
+                                <textarea id="clientFeedback" placeholder="Provide Details.."></textarea></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li><input type="hidden" value="true"/></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li><label for="rating">Rate App:</label>
+                                <input type="range" name="rating" id="rating" min="0" max="10" value="0" onchange="display_rate.value=this.value"><output name="display_rate" for="rating"></output>
+                            </li>
+                        </ul>
+                    </div>
+                </fieldset>
+                 <footer>
+                    <div>
+                        <input type="submit" id="buttonProcess" value="Submit Client Form">
+                    </div>
+                 </footer>
+            </form>
+        </section>
+        <script src="js/json.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>
+
+
+
+
